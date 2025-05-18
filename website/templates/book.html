@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<!-- Book name header  -->
+<div class="container">
+    <div class="d-flex flex-column">
+        <h1 class="ml-1">{{ book.title }}</h1>
+    </div>
+</div>
+
+<!-- Image -->
+<div class="container">
+    <div class="text-center mt-4 mb-4">
+        <img src="{{ url_for('static', filename = 'images/books/'+book.img) }}" class="rounded" alt="book.img"
+            height="500">
+    </div>
+</div>
+
+<!-- Text -->
+<div class="container">
+    <div class="d-flex flex-column">
+        <h3 class="ml-4">Автор: {{ book.author }}</h3>
+        <h4 class="ml-4">Рейтинг: {{ book.rating }}⭐</h4>
+        <h5 class="ml-4">Жанри: {{ book.genre | join(', ') }}</h5>
+
+        <p class="mt-3">{{ book.description }}</p>
+    </div>
+</div>
+
+<!-- Review input -->
+<div class="container mt-5">
+    <h4>Залиште відгук</h4>
+    <form method="POST" action="{{ url_for('views.add_review', book_id=book._id) }}">
+        <div class="form-group mt-2">
+            <label for="rating">Рейтинг</label>
+            <select class="form-control w-auto" name="rating" required>
+                <option value="" disabled selected>Виберіть рейтинг</option>
+                {% for i in range(1, 6) %}
+                <option value="{{ i }}">{{ i }} ⭐</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="review_text">Ваший відгук</label>
+            <textarea class="form-control" name="review_text" rows="4" placeholder="Напишіть ваший відгук тут..."
+                required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Відправити відгук</button>
+    </form>
+</div>
+
+<!-- Review display -->
+<div class="container mt-5">
+    <h4>Відгуки</h4>
+    {% if reviews %}
+    {% for review in reviews %}
+    <div class="card my-2">
+        <div class="card-header">
+            <strong>{{ review.username }}</strong> — {{ review.rating }}⭐
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ review.text }}</p>
+            <small class="text-muted">Зроблений {{ review.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Покищо без відгуків :(. Будьте першими!</p>
+    {% endif %}
+
+</div>
+{% endblock %}

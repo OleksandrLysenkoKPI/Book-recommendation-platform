@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% block title %}Мої книжки{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Ваші книги</h2>
+
+  {% if favourite_books %}
+  <h4 class="mt-4">Улюблені книги</h4>
+  <div class="d-flex flex-wrap gap-4">
+    {% for book in favourite_books %}
+    <div class="card" style="width: 18rem;">
+      <a href="{{ url_for('views.book_detail', book_id=book._id) }}" class="stretched-link"></a>
+      {% if book.img %}
+      <img class="card-img-top" src="{{ url_for('static', filename='images/books/' + book.img) }}" style="object-fit: cover; height: 250px;" />
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">{{ book.description[:100] }}...</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if read_books %}
+  <h4 class="mt-5">Прочитані книги</h4>
+  <div class="d-flex flex-wrap gap-4">
+    {% for book in read_books %}
+    <div class="card" style="width: 18rem;">
+      <a href="{{ url_for('views.book_detail', book_id=book._id) }}" class="stretched-link"></a>
+      {% if book.img %}
+      <img class="card-img-top" src="{{ url_for('static', filename='images/books/' + book.img) }}" style="object-fit: cover; height: 250px;" />
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">{{ book.description[:100] }}...</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if not favourite_books and not read_books %}
+  <p class="mt-4">У вас поки немає збережених книг.</p>
+  {% endif %}
+</div>
+{% endblock %}

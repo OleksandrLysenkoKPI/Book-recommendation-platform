@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('views.index') }}">BookRec</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!-- Home -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('views.index') }}">Додому</span></a>
+            </li>
+            <!-- Account -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('views.account') }}"><i class="bi bi-person-circle"></i>
+                    Акаунт</a>
+            </li>
+            <!-- Favourite books -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ url_for('views.my_books') }}"><i class="bi bi-book-half"></i> Ваші
+                    книжки</a>
+            </li>
+            <!-- Dropdown (сортування) -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Сортувати за:
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item {% if sort_by == 'title' %}active{% endif %}"
+                        href="{{ url_for('views.index', sort='title') }}">Ім'ям</a>
+                    <a class="dropdown-item {% if sort_by == 'author' %}active{% endif %}"
+                        href="{{ url_for('views.index', sort='author') }}">Автором</a>
+                    <a class="dropdown-item {% if sort_by == 'rating' %}active{% endif %}"
+                        href="{{ url_for('views.index', sort='rating') }}">Рейтингом</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="GET" action="{{ url_for('views.index') }}">
+            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Пошук" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Шукати</button>
+        </form>
+    </div>
+</nav>

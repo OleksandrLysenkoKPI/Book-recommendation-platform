@@ -1,0 +1,5 @@
+.vscode
+venv
+website/.env
+website/__pycache__
+website/db_helpers/__pycache__

@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+  <form class="w-50 border p-4 rounded bg-light" method="POST">
+    <h2 class="text-center mb-4">Log In</h2>
+
+    <!-- Email -->
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+      <div class="col-sm-9">
+        <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email" required>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group row">
+      <label for="inputPassword3" class="col-sm-3 col-form-label">Password</label>
+      <div class="col-sm-9">
+        <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="Password" required>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="form-group row">
+      <div class="col-sm-9 offset-sm-3">
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </div>
+    </div>
+
+    {% if registered %}
+    <div class="alert alert-success text-center">Registration successful! You can now log in.</div>
+    {% endif %}
+
+    <!-- Error message if needed -->
+    {% if error %}
+    <div class="alert alert-danger text-center">{{ error }}</div>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

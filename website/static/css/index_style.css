@@ -1,0 +1,15 @@
+.custom-img-size {
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Додаємо тінь для карток */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легка тінь */
+  transition: box-shadow 0.3s ease-in-out; /* Додаємо анімацію для тіні */
+}
+
+/* Тінь при наведенні на картку */
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Тінь при наведенні */
+}
